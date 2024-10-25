@@ -5,7 +5,7 @@ import { useTelegram } from './hooks/useTelegram';
 
 
 function App() {
-  const {onToggleButton, WebApp} = useTelegram()
+  const {onToggleButton} = useTelegram()
 
   return (
     <div className="App">
