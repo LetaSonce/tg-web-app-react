@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useTelegram} from '../../hooks/useTelegram';
 import './Form.css';
 
@@ -13,15 +13,13 @@ const Form = () => {
     WebApp.MainButton.setParams({
       text: 'Next'
     })
-  }, [])
 
-  useEffect(() => {
     if(!cardNumber || !dateExpired || !cvCode) {
       WebApp.MainButton.hide()
     } else {
       WebApp.MainButton.show()
     }
-  }, [cardNumber, dateExpired, cvCode])
+  }, [WebApp.MainButton, cardNumber, dateExpired, cvCode])
 
   const onChangeCardNumber = (e) => {
     setCardNumber(e.target.value)
@@ -43,21 +41,21 @@ const Form = () => {
         type="text"
         placeholder={'card number'}
         value={cardNumber}
-        onChange={setCardNumber}
+        onChange={onChangeCardNumber}
       />
       <input 
         className={'input'}
         type="text"
         placeholder={'date expired'}
         value={dateExpired}
-        onChange={setDateExpired}
+        onChange={onChangeDateExpired}
       />
       <input
         className={'input'}
         type="text"
         placeholder={'cvc2/cvv2'}
         value={cvCode}
-        onChange={setCvCode}
+        onChange={onChangeCvCode}
       />
     </div>
   )
