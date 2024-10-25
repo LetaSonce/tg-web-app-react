@@ -14,9 +14,14 @@ export function useTelegram() {
     }
   }
 
+  const WebAppButton = () => {
+    WebApp.MainButton.show()
+  }
+
   return {
     onClose,
     onToggleButton,
+    WebAppButton,
     WebApp,
     user: WebApp.initDataUnsafe?.user,
   }
