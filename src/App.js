@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
-import ProductList from './components/ProductList/ProductList';
+// import ProductList from './components/ProductList/ProductList';
 import Form from './components/Form/Form';
-import {Route, Routes} from 'react-router-dom';
+// import {Route, Routes} from 'react-router-dom';
 
 
 function App() {
@@ -12,10 +12,10 @@ function App() {
     <div className="App">
       <Header/>
       <Form />
-      <Routes>
+      {/* <Routes>
         <Route index element={<ProductList />}/>
         <Route path={'form'} element={<Form />}/>
-      </Routes>
+      </Routes> */}
     </div>
   );
 }
