@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import './App.css';
 import WebApp from '@twa-dev/sdk';
+import Header from './components/Header/Header';
 
 
 function App() {
@@ -10,12 +11,10 @@ function App() {
     WebApp.ready()
   }, [])
 
-  const onClose = () => {
-    WebApp.close()
-  }
+  
   return (
     <div className="App">
-      <button onClose={onClose}>X</button>
+      <Header></Header>
     </div>
   );
 }
