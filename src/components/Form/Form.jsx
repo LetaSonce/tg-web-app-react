@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {useTelegram} from '../../hooks/useTelegram';
 import './Form.css';
 
@@ -9,17 +9,32 @@ const Form = () => {
 
   const {WebApp} = useTelegram()
 
+  const onSendData = useCallback(() => {
+    const data = {
+      cardNumber,
+      dateExpired,
+      cvCode
+    }
+    WebApp.sendData(JSON.stringify(data))
+  }, [WebApp, cardNumber, dateExpired, cvCode])
+
   useEffect(() => {
     WebApp.MainButton.setParams({
       text: 'Next'
     })
 
+    WebApp.onEvent('mainButtonClicked', onSendData)
+
     if(!cardNumber || !dateExpired || !cvCode) {
       WebApp.MainButton.hide()
     } else {
       WebApp.MainButton.show()
+
+    return () => {
+      WebApp.offEvent('mainButtonClicked', onSendData)
     }
-  }, [WebApp.MainButton, cardNumber, dateExpired, cvCode])
+    }
+  }, [WebApp.MainButton, WebApp, cardNumber, dateExpired, cvCode, onSendData])
 
   const onChangeCardNumber = (e) => {
     setCardNumber(e.target.value)
