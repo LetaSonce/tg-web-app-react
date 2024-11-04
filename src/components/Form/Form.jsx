@@ -24,13 +24,13 @@ const Form = () => {
     return () => {
       WebApp.offEvent('mainButtonClicked', onSendData)
     }
-  }, [onSendData])
+  }, [WebApp, onSendData])
 
   useEffect(() => {
     WebApp.MainButton.setParams({
       text: 'Next'
     })
-  }, [])
+  }, [WebApp])
 
   useEffect(() => {
     if(!cardNumber || !dateExpired || !cvCode) {
