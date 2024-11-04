@@ -16,23 +16,24 @@ const Form = () => {
       cvCode
     }
     WebApp.sendData(JSON.stringify(data))
+    console.log(data)
   }, [WebApp, cardNumber, dateExpired, cvCode])
 
   useEffect(() => {
+    WebApp.onEvent('mainButtonClicked', onSendData)
+
     WebApp.MainButton.setParams({
       text: 'Next'
     })
-
-    WebApp.onEvent('mainButtonClicked', onSendData)
 
     if(!cardNumber || !dateExpired || !cvCode) {
       WebApp.MainButton.hide()
     } else {
       WebApp.MainButton.show()
+    }
 
     return () => {
       WebApp.offEvent('mainButtonClicked', onSendData)
-    }
     }
   }, [WebApp.MainButton, WebApp, cardNumber, dateExpired, cvCode, onSendData])
 
