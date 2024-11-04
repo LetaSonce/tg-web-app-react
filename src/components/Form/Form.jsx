@@ -21,21 +21,24 @@ const Form = () => {
 
   useEffect(() => {
     WebApp.onEvent('mainButtonClicked', onSendData)
+    return () => {
+      WebApp.offEvent('mainButtonClicked', onSendData)
+    }
+  }, [onSendData])
 
+  useEffect(() => {
     WebApp.MainButton.setParams({
       text: 'Next'
     })
+  }, [])
 
+  useEffect(() => {
     if(!cardNumber || !dateExpired || !cvCode) {
       WebApp.MainButton.hide()
     } else {
       WebApp.MainButton.show()
     }
-
-    return () => {
-      WebApp.offEvent('mainButtonClicked', onSendData)
-    }
-  }, [WebApp.MainButton, WebApp, cardNumber, dateExpired, cvCode, onSendData])
+  }, [WebApp, cardNumber, dateExpired, cvCode])
 
   const onChangeCardNumber = (e) => {
     setCardNumber(e.target.value)
